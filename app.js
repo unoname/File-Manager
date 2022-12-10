@@ -46,7 +46,7 @@ rl.on('line', (data) => {
 	process.exit();
 	case 'up': pathToCurrentDir = up(pathToCurrentDir); break;
 	case 'cd': pathToCurrentDir = cd(src, pathToCurrentDir); break;
-	case 'ls': pathToCurrentDir = list(pathToCurrentDir, {withFileTypes: true}); break;
+	case 'ls': list(pathToCurrentDir, {withFileTypes: true}); break;
 	case 'cat': read(src, pathToCurrentDir); break;
 	case 'cp': copy(src, dest, mode.COPYFILE_EXCL, pathToCurrentDir); break; 
 	case 'rm': remove(src, dest, pathToCurrentDir); break; 
