@@ -1,7 +1,6 @@
 import { createBrotliDecompress } from 'node:zlib';
 import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'node:stream';
-import os from 'os';
 
 export const decompress = async (src, dest, pathToHomeDir) => {
   const readStream = createReadStream(src);

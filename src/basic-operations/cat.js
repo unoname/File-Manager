@@ -1,16 +1,7 @@
-import fs from 'node:fs/promises';
-import { constants } from 'fs';
-import os from 'os';
+import { readFile } from 'fs/promises';
 
-export const read = async (src, pathToCurrentDir) => {
-	pathToCurrentDir = pathToCurrentDir ? pathToCurrentDir : os.homedir();
-try {		
-	const data = await fs.readFile(src);
-	const result = data.toString();
-	console.log(result);
-	console.log(`You are currently in ${pathToCurrentDir}`);		 	
-	}	catch {
-	console.log('Operation failed');
-	console.log(`You are currently in ${pathToCurrentDir}`)
-	}  
+export const read = async src => {
+  const data = await readFile(src);
+  const result = data.toString();
+  console.log(result);
 };

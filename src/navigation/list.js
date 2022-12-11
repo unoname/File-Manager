@@ -5,7 +5,7 @@ export const list = async () => {
   const readDir = await readdir(cwd());
   const arrNameFile = [];
   readDir.map(file => {
-    arrNameFile.push(file.name);
+    arrNameFile.push(file);
   });
   console.table(arrNameFile);
 };

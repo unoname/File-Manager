@@ -1,17 +1,15 @@
-import fs from 'fs';
-import os from 'os';
-import { constants } from 'fs';
+import { createReadStream, access } from 'fs';
 
 const { createHash } = await import('crypto');
 
 export const calculateHash = (src, pathToCurrentDir) => {
   const hash = createHash('sha256');
-  fs.access(src, constants.F_OK, err => {
+  access(src, err => {
     if (err) {
       console.log(`file ${err ? 'does not exist' : 'exists'}`);
     }
   });
-  const input = fs.createReadStream(src);
+  const input = createReadStream(src);
   input.on('data', chunk => {
     hash.update(chunk);
   });

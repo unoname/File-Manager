@@ -1,7 +1,5 @@
-import fs from 'node:fs/promises';
-import os from 'os';
+import { copyFile } from 'node:fs/promises';
 
-export const copy = async (src, dest, options, pathToCurrentDir) => {
-  pathToCurrentDir = pathToCurrentDir ? pathToCurrentDir : os.homedir();
-  await fs.copyFile(src, dest, options);
+export const copy = async (src, dest, options) => {
+  await copyFile(src, dest, options);
 };
