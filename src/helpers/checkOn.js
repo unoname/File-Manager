@@ -1,9 +1,10 @@
 import { stat } from 'fs/promises';
 import { logErrorInput } from './messages.js';
 
-export const isFile = async src => {
+export const isFile = src => {
   try {
-    const statFile = await stat(src);
+    const statFile = stat(src);
+    console.log(statFile);
     return statFile.isFile();
   } catch {
     return false;
