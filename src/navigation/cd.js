@@ -1,15 +1,17 @@
 import { resolve } from 'path';
 import { stat } from 'fs/promises';
-import { chdir, cwd } from 'process';
+import { cwd, chdir } from 'process';
+import { logErrorInput, logPath } from '../helpers/messages.js';
 
 export const cd = async destinationPath => {
-  const dirStat = await stat(resolve(destinationPath));
-  dirStat.then(dir => {
-    if (dir.isDirectory()) {
-      chdir(destinationPath);
+  const [dest] = parsePath(destinationPath);
+  try {
+    const dirStat = await stat(dest);
+    if (dirStat.isDirectory()) {
+      chdir(dest);
+      logPath();
     }
-  });
-  // .catch(err => {
-  //   console.log(`Operation failed\nYou are currently in ${cwd()}`);
-  // });
+  } catch {
+    logErrorInput();
+  }
 };

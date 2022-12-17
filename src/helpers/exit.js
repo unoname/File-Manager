@@ -1,5 +1,5 @@
-export const username = process.argv.slice(2).join('').split('=')[1]
-  ? process.argv.slice(2).join('').split('=')[1]
+export const username = process.argv.slice(4).join('').split('=').pop()
+  ? process.argv[4].split('=').pop()
   : 'User';
 const farewellMessage = `Thank you for using File Manager, ${username}!`;
 

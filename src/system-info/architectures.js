@@ -1,8 +1,11 @@
 import os from 'os';
+import { strLogPath } from '../helpers/messages.js';
 
 export const getArch = () => {
-   const result = os.arch();
+  const result = os.arch();
   console.log(
-    `CPU architecture for which Node.js binary has compiled: ${result}`
+    'CPU architecture for which Node.js binary has compiled: ',
+    result,
+    strLogPath
   );
 };

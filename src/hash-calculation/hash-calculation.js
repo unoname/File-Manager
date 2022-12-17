@@ -1,19 +1,26 @@
-import { createReadStream, access } from 'fs';
+import { createReadStream } from 'fs';
+import { logErrorInput, logErrorOperation } from '../helpers/messages.js';
+import { parsePath } from '../helpers/parsePath.js';
+import { isFile } from '../helpers/checkOn.js';
 
 const { createHash } = await import('crypto');
 
-export const calculateHash = (src, pathToCurrentDir) => {
-  const hash = createHash('sha256');
-  access(src, err => {
-    if (err) {
-      console.log(`file ${err ? 'does not exist' : 'exists'}`);
+export const calculateHash = async source => {
+  try {
+    const hash = createHash('sha256');
+    const [src] = parsePath(source);
+    if (isFile(src)) {
+      const input = await createReadStream(src);
+      input.on('data', chunk => {
+        hash.update(chunk);
+      });
+      input.on('end', () => {
+        console.log(hash.digest('hex'));
+      });
+    } else {
+      logErrorInput();
     }
-  });
-  const input = createReadStream(src);
-  input.on('data', chunk => {
-    hash.update(chunk);
-  });
-  input.on('end', () => {
-    console.log(hash.digest('hex'));
-  });
+  } catch {
+    logErrorOperation();
+  }
 };

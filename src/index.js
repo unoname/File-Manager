@@ -1,4 +1,3 @@
-import { function_wrapper } from './helpers/function-wrapper.js';
 import { copy } from './basic-operations/copy.js';
 import { list } from './navigation/list.js';
 import { read } from './basic-operations/cat.js';
@@ -37,9 +36,4 @@ export const commands = {
   '--EOL': getEol,
   '--username': getUsername,
   hash: calculateHash,
-};
-export const runCommand = function (command, ...args) {
-  
-    function_wrapper(commands[command], ...args);
- 
 };

@@ -1,5 +1,6 @@
 import { readdir } from 'fs/promises';
 import { cwd } from 'process';
+import { logPath } from '../helpers/messages.js';
 
 export const list = async () => {
   const readDir = await readdir(cwd());
@@ -8,4 +9,5 @@ export const list = async () => {
     arrNameFile.push(file);
   });
   console.table(arrNameFile);
+  logPath();
 };
