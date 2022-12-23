@@ -3,19 +3,24 @@ import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'stream';
 import { logErrorInput, logErrorOperation } from '../helpers/messages.js';
 import { parsePath } from '../helpers/parsePath.js';
+import { isFile, isDirectory } from '../helpers/checkOn.js';
 
 export const compress = async (source, destination) => {
   try {
     const [src, dest] = parsePath(source, destination);
-    const readStream = await createReadStream(src);
-    const writeStream = await createWriteStream(dest);
-    const zip = await createBrotliCompress();
-    await pipeline(readStream, zip, writeStream, err => {
-      if (err) {
-        logErrorOperation();
-      }
-    });
-  } catch {
-    logErrorInput();
+    if ((await isFile(src)) && (await isDirectory(dest))) {
+      const readStream = await createReadStream(src);
+      const writeStream = await createWriteStream(dest);
+      const zip = await createBrotliCompress();
+      await pipeline(readStream, zip, writeStream, err => {
+        if (err) {
+          logErrorOperation();
+        }
+      });
+    } else {
+      logErrorInput();
+    }
+  } catch (e) {
+    logErrorOperation();
   }
 };

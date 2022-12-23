@@ -9,7 +9,7 @@ export const calculateHash = async source => {
   try {
     const hash = createHash('sha256');
     const [src] = parsePath(source);
-    if (isFile(src)) {
+    if (await isFile(src)) {
       const input = await createReadStream(src);
       input.on('data', chunk => {
         hash.update(chunk);
@@ -20,7 +20,7 @@ export const calculateHash = async source => {
     } else {
       logErrorInput();
     }
-  } catch {
+  } catch (e) {
     logErrorOperation();
   }
 };

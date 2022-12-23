@@ -7,12 +7,12 @@ export const copy = async (source, destination) => {
   try {
     const [src, dest] = parsePath(source, destination);
     console.log(src, dest);
-    if (isFile(src) && isDirectory(dest)) {
+    if (await isFile(src) && await isDirectory(dest)) {
       await copyFile(src, dest);
     } else {
       logErrorInput();
     }
-  } catch {
+  } catch(e) {
     logErrorOperation();
   }
 };

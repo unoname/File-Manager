@@ -10,14 +10,14 @@ import { parsePath } from '../helpers/parsePath.js';
 export const read = async src => {
   try {
     const [path] = parsePath(src);
-    if (isFile(src)) {
+    if (isFile(path)) {
       const data = await readFile(path);
       const result = data.toString();
       console.log(result, strLogPath);
     } else {
       logErrorInput();
     }
-  } catch {
+  } catch (e) {
     logErrorOperation();
   }
 };

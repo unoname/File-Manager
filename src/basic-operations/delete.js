@@ -6,12 +6,12 @@ import { parsePath } from '../helpers/parsePath.js';
 export const remove = async source => {
   try {
     const [src] = parsePath(source);
-    if (isFile(src)) {
+    if (await isFile(src)) {
       await rm(src);
     } else {
       logErrorInput();
     }
-  } catch {
+  } catch (e) {
     logErrorOperation();
   }
 };

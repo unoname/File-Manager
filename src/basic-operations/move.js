@@ -6,13 +6,13 @@ import { parsePath } from '../helpers/parsePath.js';
 export const move = async (source, destination) => {
   try {
     const [src, dest] = parsePath(source, destination);
-    if (isFile(src)) {
+    if (await isFile(src)) {
       await copyFile(src, dest);
       await rm(src);
     } else {
       logErrorInput();
     }
-  } catch {
+  } catch(e) {
     logErrorOperation();
   }
 };

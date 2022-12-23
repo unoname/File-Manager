@@ -1,6 +1,10 @@
 import { stat } from 'fs/promises';
 import { chdir } from 'process';
-import { logErrorInput, logPath } from '../helpers/messages.js';
+import {
+  logErrorInput,
+  logPath,
+  logErrorOperation,
+} from '../helpers/messages.js';
 import { parsePath } from '../helpers/parsePath.js';
 
 export const cd = async destinationPath => {
@@ -15,7 +19,7 @@ export const cd = async destinationPath => {
     } else {
       logErrorInput();
     }
-  } catch {
-    logErrorInput();
+  } catch (e) {
+    logErrorOperation();
   }
 };

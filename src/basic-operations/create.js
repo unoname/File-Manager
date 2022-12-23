@@ -1,5 +1,9 @@
 import { appendFile } from 'fs/promises';
-import { logErrorInput, logErrorOperation, logPath } from '../helpers/messages.js';
+import {
+  logErrorInput,
+  logErrorOperation,
+  logPath,
+} from '../helpers/messages.js';
 import { parsePath } from '../helpers/parsePath.js';
 
 export const create = async function (source) {
@@ -7,11 +11,11 @@ export const create = async function (source) {
     if (source) {
       const [src] = parsePath(source);
       await appendFile(src, '');
-			logPath();
+      logPath();
     } else {
       logErrorInput();
     }
-  } catch {
+  } catch (e) {
     logErrorOperation();
   }
 };
