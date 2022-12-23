@@ -1,5 +1,6 @@
 import { cwd } from 'process';
 import { username } from './exit.js';
+import {homedir} from 'os';
 
 export const logErrorOperation = () => {
   console.log(`Operation failed${strLogPath}\n`);
@@ -15,4 +16,4 @@ export const logPath = () => {
 
 export const strLogPath = `\nYou are currently in ${cwd()}`;
 
-export const greetings = `Welcome to the File Manager, ${username}!`;
+export const greetings = `Welcome to the File Manager, ${username}!\nYou are currently in ${homedir()}`;

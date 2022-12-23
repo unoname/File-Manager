@@ -1,9 +1,11 @@
 import * as readline from 'readline';
-import { stdin as input, stdout as output } from 'process';
+import { homedir } from 'os';
+import { stdin as input, stdout as output, chdir } from 'process';
 import { logErrorInput, greetings } from './src/helpers/messages.js';
 import { ex } from './src/helpers/exit.js';
 import { commands } from './src/index.js';
 
+chdir(homedir());
 console.log(greetings);
 const rl = readline.createInterface({
   input,
