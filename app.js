@@ -13,17 +13,17 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', data => {
-  let command =
+  const command =
     data.trim().split(' ')[0] === 'os'
       ? data.trim().split(' ')[1]
       : data.trim().split(' ')[0];
 
-  let args = data
+  const args = data
     .trim()
     .replace(/\s{2,}/g, ' ')
     .split(' ');
-  let src = args[1];
-  let dest = args[2];
+  const src = args[1];
+  const dest = args[2];
 
   if (command in commands) {
     commands[command](src, dest);

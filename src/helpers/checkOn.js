@@ -1,5 +1,5 @@
 import { stat } from 'fs/promises';
-import { logErrorInput } from './messages.js';
+import { basename } from 'path';
 
 export const isFile = src => {
   try {
@@ -12,13 +12,10 @@ export const isFile = src => {
   }
 };
 
-export const isDirectory = source => {
+export const isDirectory = dest => {
   try {
-    const src = source
-      .split('/')
-      .filter((e, i, arr) => i != arr.length - 1)
-      .join('/');
-    const statDir = stat(src);
+    const pathToDir = dest.replace(basename(dest), '');
+    const statDir = stat(pathToDir);
     return statDir.then(dir => {
       return dir.isDirectory();
     });

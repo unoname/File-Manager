@@ -1,13 +1,13 @@
 import { cwd } from 'process';
 import { username } from './exit.js';
-import {homedir} from 'os';
+import { homedir } from 'os';
 
 export const logErrorOperation = () => {
-  console.log(`Operation failed${strLogPath}\n`);
+  console.log(`Operation failed\nYou are currently in ${cwd()}`);
 };
 
 export const logErrorInput = () => {
-  console.log(`Invalid input${strLogPath}\n`);
+  console.log(`Invalid input\nYou are currently in ${cwd()}`);
 };
 
 export const logPath = () => {

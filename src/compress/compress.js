@@ -9,9 +9,9 @@ export const compress = async (source, destination) => {
   try {
     const [src, dest] = parsePath(source, destination);
     if ((await isFile(src)) && (await isDirectory(dest))) {
-      const readStream = await createReadStream(src);
-      const writeStream = await createWriteStream(dest);
-      const zip = await createBrotliCompress();
+      const readStream = createReadStream(src);
+      const writeStream = createWriteStream(dest);
+      const zip = createBrotliCompress();
       await pipeline(readStream, zip, writeStream, err => {
         if (err) {
           logErrorOperation();

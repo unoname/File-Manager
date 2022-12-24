@@ -5,9 +5,9 @@ import { parsePath } from '../helpers/parsePath.js';
 
 export const rn = async (oldPath, newPath) => {
   try {
-    const [path] = parsePath(oldPath);
+    const [path, rePath] = parsePath(oldPath, newPath);
     if (await isFile(path)) {
-      await rename(path, newPath);
+      await rename(path, rePath);
     } else {
       logErrorInput();
     }

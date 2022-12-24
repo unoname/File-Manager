@@ -1,9 +1,10 @@
-import { readFile } from 'fs/promises';
+import { createReadStream } from 'fs';
+import { stdout } from 'process';
 import { isFile } from '../helpers/checkOn.js';
 import {
   logErrorInput,
   logErrorOperation,
-  strLogPath,
+  logPath,
 } from '../helpers/messages.js';
 import { parsePath } from '../helpers/parsePath.js';
 
@@ -11,9 +12,9 @@ export const read = async src => {
   try {
     const [path] = parsePath(src);
     if (isFile(path)) {
-      const data = await readFile(path);
-      const result = data.toString();
-      console.log(result, strLogPath);
+      const readStream = await createReadStream(path);
+      readStream.pipe(stdout);
+      logPath();
     } else {
       logErrorInput();
     }
