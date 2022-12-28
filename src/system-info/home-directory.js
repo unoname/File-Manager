@@ -1,7 +1,6 @@
 import os from 'os';
-import { strLogPath } from '../helpers/messages.js';
 
-export const getHomeDir = () => {
+export const getHomeDir = async () => {
   const result = os.homedir();
-  console.log(result, strLogPath);
+  console.log(result);
 };

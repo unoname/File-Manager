@@ -3,11 +3,11 @@ import { username } from './exit.js';
 import { homedir } from 'os';
 
 export const logErrorOperation = () => {
-  console.log(`Operation failed\nYou are currently in ${cwd()}`);
+  console.log(`Operation failed\n`);
 };
 
 export const logErrorInput = () => {
-  console.log(`Invalid input\nYou are currently in ${cwd()}`);
+  console.log(`Invalid input\n`);
 };
 
 export const logPath = () => {

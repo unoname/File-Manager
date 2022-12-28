@@ -5,7 +5,7 @@ import { isFile } from '../helpers/checkOn.js';
 
 const { createHash } = await import('crypto');
 
-export const calculateHash = async source => {
+export const calculateHash = async ([source]) => {
   try {
     const hash = createHash('sha256');
     const [src] = parsePath(source);

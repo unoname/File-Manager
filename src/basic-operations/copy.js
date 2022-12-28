@@ -7,18 +7,19 @@ import {
 } from '../helpers/messages.js';
 import { parsePath } from '../helpers/parsePath.js';
 
-export const copy = async (source, destination) => {
-  try {
-    const [src, dest] = parsePath(source, destination);
-    if ((await isFile(src)) && (await isDirectory(dest))) {
-      const readStream = createReadStream(src);
-      const writeStream = createWriteStream(dest);
-      await readStream.pipe(writeStream);
-      logPath();
-    } else {
-      logErrorInput();
-    }
-  } catch (e) {
-    logErrorOperation();
+export const copy = async function ([source, destination]) {
+  const [src, dest] = parsePath(source, destination);
+  if ((await isFile(src)) && (await isDirectory(dest))) {
+    const readStream = await createReadStream(src);
+    readStream.on('error', err => {
+      console.log('Invalid input', err.message);
+    });
+    const writeStream = await createWriteStream(dest);
+    writeStream.on('error', err => {
+      console.log('Invalid input', err.message);
+    });
+    await readStream.pipe(writeStream);
+  } else {
+    logErrorInput();
   }
 };

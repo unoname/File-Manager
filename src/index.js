@@ -16,6 +16,7 @@ import { move } from './basic-operations/move.js';
 import { up } from './navigation/up.js';
 import { cd } from './navigation/cd.js';
 import { ex } from './helpers/exit.js';
+import { logErrorInput, logPath } from './helpers/messages.js';
 
 export const commands = {
   '.exit': ex,
@@ -36,4 +37,15 @@ export const commands = {
   '--EOL': getEol,
   '--username': getUsername,
   hash: calculateHash,
+};
+export const runCommand = async (command, src, dest) => {
+  if (command in commands) {
+    await commands[command]([src, dest])
+      .catch(e => {
+        logErrorInput();
+      })
+      .then(res => logPath());
+  } else {
+    logErrorInput();
+  }
 };

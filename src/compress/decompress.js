@@ -5,7 +5,7 @@ import { logErrorInput, logErrorOperation } from '../helpers/messages.js';
 import { parsePath } from '../helpers/parsePath.js';
 import { isFile, isDirectory } from '../helpers/checkOn.js';
 
-export const decompress = async (source, destination) => {
+export const decompress = async ([source, destination]) => {
   try {
     const [src, dest] = parsePath(source, destination);
     if ((await isFile(src)) && (await isDirectory(dest))) {

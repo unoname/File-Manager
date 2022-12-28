@@ -1,7 +1,6 @@
 import os from 'os';
-import { strLogPath } from '../helpers/messages.js';
 
-export const getUsername = () => {
+export const getUsername = async () => {
   const result = os.userInfo();
-  console.log(result.username, strLogPath);
+  console.log(result.username);
 };

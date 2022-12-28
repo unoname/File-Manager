@@ -1,7 +1,7 @@
 import { stat } from 'fs/promises';
 import { basename } from 'path';
 
-export const isFile = src => {
+export const isFile = async src => {
   try {
     const statFile = stat(src);
     return statFile.then(file => {
@@ -12,7 +12,7 @@ export const isFile = src => {
   }
 };
 
-export const isDirectory = dest => {
+export const isDirectory = async dest => {
   try {
     const pathToDir = dest.replace(basename(dest), '');
     const statDir = stat(pathToDir);

@@ -3,7 +3,7 @@ import { isFile } from '../helpers/checkOn.js';
 import { logErrorInput, logErrorOperation } from '../helpers/messages.js';
 import { parsePath } from '../helpers/parsePath.js';
 
-export const remove = async source => {
+export const remove = async ([source]) => {
   try {
     const [src] = parsePath(source);
     if (await isFile(src)) {

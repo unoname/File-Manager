@@ -12,5 +12,4 @@ export const list = async () => {
       type: dirent.isDirectory() ? 'directory' : 'file',
     }));
   console.table(arrNameFile);
-  logPath();
 };
